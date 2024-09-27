@@ -1,0 +1,36 @@
+<div class="main">
+  <div>
+    <section class="welcome">
+      <h1>Bienbenidos a IC Tienda</h1>
+      <p>
+        Tienda de ejemplo para clases de desarrollo
+      </p>
+    </section>
+    <section class="categories">
+      <ul>
+        <li><a href="#">Tiendas</a></li>
+        <li><a href="#">Promociones</a></li>
+        <li><a href="#">Pago seguro</a></li>
+        <li><a href="#">Envios</a></li>
+      </ul>
+    </section>
+    <section class="promos">
+      <h3>Lo mas vendido</h3>
+    </section>
+    <section class="ofertas">
+      <h3>Ofertas</h3>
+    </section>
+  </div>
+  <div>
+    <h3>Productos</h3>
+    <section>
+      @for(prod of products; track $index) {
+        <div>
+          {{prod.name}}
+        </div>
+      } @empty {
+        <p> No hay productos</p>
+      }
+    </section>
+  </div>
+</div>

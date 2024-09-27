@@ -1,0 +1,33 @@
+.public-layout {
+    &>header{
+        background-color: #5d5fef;
+        .content-web {
+            padding: 1.6em;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            color: #dfdfdf;
+            justify-content: space-between;
+            ul.menu {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                padding: 0;
+                margin: 0;
+                list-style: none;
+                text-decoration: none;
+                gap: 0.6em;
+                li {
+                    color: #dfdfdf;
+                    padding: 0.4em;
+                    margin: 0.4em;
+                }
+            }
+        }
+    }
+
+    .content-web {
+        max-width: 1280px;
+        margin: 0 auto;
+    }
+}

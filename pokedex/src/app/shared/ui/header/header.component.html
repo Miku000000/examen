@@ -1,0 +1,10 @@
+<div>
+    <h3>Cabecera de la pagina</h3>
+    <input type="number" #num1>
+    <input type="number" #num2>
+    <button (click)="suma(+num1.value, +num2.value)">+</button>
+    <button (click)="resta(+num1.value, +num2.value)">-</button>
+    <button (click)="multiplicacion(+num1.value, +num2.value)">*</button>
+    <button (click)="division(+num1.value, +num2.value)">/</button>
+    <input type="text" [value]="resultado">
+</div>

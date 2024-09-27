@@ -1,0 +1,36 @@
+<p>pokedex works!</p>
+<div>
+    <button (click)="before()"> anterior</button>
+    <button (click)="next()"> siguiente</button>
+</div>
+@if (pokemon) {
+    <div>
+        <table>
+            <tr>
+                <th>Nombre</th>
+                <td>{{pokemon.name}}</td>
+            </tr>
+            <tr>
+                <td>Sonido</td>
+                <td>
+                    <audio controls>
+                        <source [src]="pokemon.sound" type="audio/ogg">
+                      Your browser does not support the audio element.
+                    </audio> 
+                </td>
+            </tr>
+            <tr>
+                <th>Imagenes</th>
+                <td>
+                    @for (sp of pokemon.sprites; track $index) {
+                        <img [src]="sp" [alt]="pokemon.name">
+                        <br>
+                     }
+                </td>
+            </tr>
+            
+        </table>
+    </div>
+} @else {
+
+}

@@ -1,0 +1,44 @@
+.admin-container {
+    background-color: #06040e;
+    color: #FDFDFD;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    &> header {
+        background-color: #14121e;
+        padding: 2em;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        .logo {
+            display: flex;
+            flex-direction: row;
+            gap: 1em;
+        }
+        .search {
+            background-color: #0e0c16;
+            border-radius: 1.6em;
+            color: #999;
+            min-width: 260px;
+            padding: 0.6em;
+        }
+    }
+    &> .container {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        align-content: stretch;
+        &> aside {
+            width: 60px;
+            height: 100%;
+        }
+        &> section {
+            width: calc( 100vw - 60px );
+            padding: 2em 1.4em;
+        }
+    }
+
+}
+

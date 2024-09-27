@@ -1,0 +1,118 @@
+    <h3>
+    Administracion de marcas
+    <button class="addBtn" (click)="addBrand()">Agregar marca</button>
+</h3>
+<div>
+    @if(showFormBrand != 'none') {
+        <section>
+            <h4> Agregar Marca</h4>
+            <form [formGroup]="formBrand" (submit)="createBrand()">
+                <div>
+                    <label for="name">Nombre</label>
+                    <input type="text" formControlName="name" />
+                    <div class="error">
+                        @if(!formBrand.pristine && formBrand.controls['name'].errors) {
+                            @if(formBrand.controls['name'].errors['required']){
+                                <span>Este campo es requerido</span>
+                            }
+                            @if(formBrand.controls['name'].errors['minlength']){
+                                <span>La cantidad de letras minimas para una
+                                    marca es {{formBrand.controls['name'].errors['minlength']['requiredLength']}}
+                                    ( actualmente tiene: {{formBrand.controls['name'].errors['minlength']['actualLength']}} caracteres)
+                                </span>
+                            }
+                            @if(formBrand.controls['name'].errors['maxlength']){
+                                <span>La cantida de letras maxima para una
+                                    marca es {{formBrand.controls['name'].errors['maxlength']['requiredLength']}}
+                                    ( actualmente tiene: {{formBrand.controls['name'].errors['maxlength']['actualLength']}} caracteres)
+                                </span>
+                            }
+                        }
+                    </div>
+                </div>
+                <div>
+                    <label for="description">Descripción</label>
+                    <textarea formControlName="description"></textarea>
+                    <div class="error">
+                        @if(!formBrand.pristine && formBrand.controls['description'].errors) {
+                            @if(formBrand.controls['description'].errors['required']){
+                                <span>Este campo es requerido</span>
+                            }
+                            @if(formBrand.controls['description'].errors['minlength']){
+                                <span>La cantidad de letras minimas para una
+                                    marca es {{formBrand.controls['description'].errors['minlength']['requiredLength']}}
+                                    ( actualmente tiene: {{formBrand.controls['description'].errors['minlength']['actualLength']}} caracteres)
+                                </span>
+                            }
+                            @if(formBrand.controls['description'].errors['maxlength']){
+                                <span>La cantida de letras maxima para una
+                                    marca es {{formBrand.controls['description'].errors['maxlength']['requiredLength']}}
+                                    ( actualmente tiene: {{formBrand.controls['description'].errors['maxlength']['actualLength']}} caracteres)
+                                </span>
+                            }
+                        }
+                    </div>
+                </div>
+                <div>
+                    <button (click)="showFormBrand = 'none'">Cancelar</button>
+                    <button type="submit" [disabled]="!formBrand.valid" >Agregar</button>
+
+                </div>
+            </form>
+        </section>
+    }
+</div>
+
+<div>
+    @switch(cargaDatos) {
+        @case ('none') {
+
+        }
+        @case ('loading') {
+            <p>Estamos preparandonos para que todo funcione
+                <br>
+                por favor espere unos segundos.
+            </p>
+        }
+        @case ('done') {
+            <br><br>
+            <table class="table-data">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for(brand of brands; track $index) {
+                        <tr>
+                            <td>{{brand.name}}
+                            </td>
+                            <td>{{brand.description}}</td>
+                            <td>
+                                @if(brand.remove) {
+                                    <span>¿Esta seguro de eliminar esta marca?</span>
+                                    <div>
+                                        <button class="okBtn" (click)="confirmDelete(brand.id)">Si</button>
+                                        <button class="CancelBtn" (click)="cancelDelete(brand)">No</button>
+                                    </div>
+                                } @else {
+                                    <button class="editBtn">Editar</button>
+                                    <button class="remBtn" (click)="removeBrand(brand)">Eliminar</button>
+                                }
+                                
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        @case ('error') {
+            <p>
+                Lo sentimos tubimos un error.
+                por favor intenelo en unos minutos.
+            </p>
+        }
+    }
+</div>
