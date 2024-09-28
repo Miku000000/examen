@@ -41,10 +41,10 @@ export class BrandsComponent implements OnInit {
       }
     });
   }
-    addBrand() {
-      this.showFormBrand = "add";
-      this.createBrandState = 'none';
-    }
+  addBrand() {
+    this.showFormBrand = "add";
+    this.createBrandState = 'none';
+  }
 
   removeBrand(brand: Brand) {
     brand.remove = true;

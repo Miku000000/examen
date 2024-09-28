@@ -539,7 +539,7 @@ var Validators = class {
     return patternValidator(pattern);
   }
   /**
-   * @
+   * @description
    * Validator that performs no operation.
    *
    * @see {@link updateValueAndValidity()}

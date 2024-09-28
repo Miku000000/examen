@@ -1,3 +1,118 @@
-<p>
-  category works!
-</p>
+<h3>
+  Administracion de categorias
+  <button class="addBtn" (click)="addCategory()">Agregar categoria</button>
+</h3>
+<div>
+  @if(showFormCategory != 'none') {
+      <section>
+          <h4> Agregar Categoria</h4>
+          <form [formGroup]="formCategory" (submit)="createCategory()">
+              <div>
+                  <label for="name">Nombre</label>
+                  <input type="text" formControlName="name" />
+                  <div class="error">
+                      @if(!formCategory.pristine && formCategory.controls['name'].errors) {
+                          @if(formCategory.controls['name'].errors['required']){
+                              <span>Este campo es requerido</span>
+                          }
+                          @if(formCategory.controls['name'].errors['minlength']){
+                              <span>La cantidad de letras minimas para una
+                                  categoria es {{formCategory.controls['name'].errors['minlength']['requiredLength']}}
+                                  ( actualmente tiene: {{formCategory.controls['name'].errors['minlength']['actualLength']}} caracteres)
+                              </span>
+                          }
+                          @if(formCategory.controls['name'].errors['maxlength']){
+                              <span>La cantida de letras maxima para una
+                                  categoria es {{formCategory.controls['name'].errors['maxlength']['requiredLength']}}
+                                  ( actualmente tiene: {{formCategory.controls['name'].errors['maxlength']['actualLength']}} caracteres)
+                              </span>
+                          }
+                      }
+                  </div>
+              </div>
+              <div>
+                  <label for="description">Descripción</label>
+                  <textarea formControlName="description"></textarea>
+                  <div class="error">
+                      @if(!formCategory.pristine && formCategory.controls['description'].errors) {
+                          @if(formCategory.controls['description'].errors['required']){
+                              <span>Este campo es requerido</span>
+                          }
+                          @if(formCategory.controls['description'].errors['minlength']){
+                              <span>La cantidad de letras minimas para una
+                                  categoria es {{formCategory.controls['description'].errors['minlength']['requiredLength']}}
+                                  ( actualmente tiene: {{formCategory.controls['description'].errors['minlength']['actualLength']}} caracteres)
+                              </span>
+                          }
+                          @if(formCategory.controls['description'].errors['maxlength']){
+                              <span>La cantida de letras maxima para una
+                                  categoria es {{formCategory.controls['description'].errors['maxlength']['requiredLength']}}
+                                  ( actualmente tiene: {{formCategory.controls['description'].errors['maxlength']['actualLength']}} caracteres)
+                              </span>
+                          }
+                      }
+                  </div>
+              </div>
+              <div>
+                  <button (click)="showFormCategory = 'none'">Cancelar</button>
+                  <button type="submit" [disabled]="!formCategory.valid" >Agregar</button>
+
+              </div>
+          </form>
+      </section>
+  }
+</div>
+
+<div>
+  @switch(cargaDatos) {
+      @case ('none') {
+
+      }
+      @case ('loading') {
+          <p>Estamos preparandonos para que todo funcione
+              <br>
+              por favor espere unos segundos.
+          </p>
+      }
+      @case ('done') {
+          <br><br>
+          <table class="table-data">
+              <thead>
+                  <tr>
+                      <th>Nombre</th>
+                      <th>Descripcion</th>
+                      <th>Acciones</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  @for(category of categories; track $index) {
+                      <tr>
+                          <td>{{category.name}}
+                          </td>
+                          <td>{{category.description}}</td>
+                          <td>
+                              @if(category.remove) {
+                                  <span>¿Esta seguro de eliminar esta categoria?</span>
+                                  <div>
+                                      <button class="okBtn" (click)="confirmDelete(category.id)">Si</button>
+                                      <button class="CancelBtn" (click)="cancelDelete(category)">No</button>
+                                  </div>
+                              } @else {
+                                  <button class="editBtn">Editar</button>
+                                  <button class="remBtn" (click)="removeCategory(category)">Eliminar</button>
+                              }
+                              
+                          </td>
+                      </tr>
+                  }
+              </tbody>
+          </table>
+      }
+      @case ('error') {
+          <p>
+              Lo sentimos tubimos un error.
+              por favor intenelo en unos minutos.
+          </p>
+      }
+  }
+</div>
